@@ -2,7 +2,7 @@ import { GameParameters } from "../constants/GameParameters";
 import { BlowerController } from "./BlowerContoller";
 import { BoardsController } from "./BoardsController";
 
-export class GameController{
+export class MultiplayerController{
     blower: BlowerController;
     boardController: BoardsController
     gameParameters: GameParameters;
@@ -74,15 +74,22 @@ export class GameController{
         console.log(`average time for line win: ${avgLineWin}`)
 
         console.log('\n')
-        for(let i = 0; i < this.blower.ballsPulled.length; i++){
-            console.log(`Pull ${i+1}: ${this.blower.ballsPulled[i].toString()}`)
+        for(let i = 1; i <= this.blower.ballsPulled.length; i++){
+            let {easyLinearWin, diagonalWin, fourCornerWin, linearWin, blackOutWin} = this.boardController.typeOfWins[i];
+            if(!(easyLinearWin == 0 && diagonalWin == 0 && fourCornerWin == 0 && linearWin == 0 && blackOutWin == 0)){
+                let outputstr = `Pull ${i} |`
+                if(this.gameParameters.diagonalWin) outputstr += ` Diagonal Wins: ${diagonalWin} |`
+                if(this.gameParameters.fourCornerWin) outputstr += ` Four Corner Wins: ${fourCornerWin} |`
+                if(this.gameParameters.linearWin) outputstr += (this.gameParameters.freeSpotEnabled)?` Easy Linear Wins: ${easyLinearWin} | Hard Linear Wins: ${linearWin}| `: ` Linear Wins: ${easyLinearWin+linearWin} |`
+                if(this.gameParameters.blackOutWin) outputstr += ` Blackout Wins: ${blackOutWin} |`
+                console.log(outputstr)
+            }
         }
+    }
 
-
-
-
-
-
-
+    printNonWinningBoards(){
+        this.boardController.boards.forEach(board => {
+            console.log(board.toString());
+        });
     }
 }

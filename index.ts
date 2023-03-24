@@ -1,7 +1,9 @@
-import { GameController } from "./src/controllers/GameController";
+import { MultiplayerController } from "./src/controllers/MultiplayerController";
 import { GameParameters } from "./src/constants/GameParameters";
 import { Board } from "./src/classes/Board";
 import { WinChecker } from "./src/controllers/WinChecker";
+import { Ball } from "./src/classes/Ball";
+import { MultiSolo } from "./src/controllers/MultiSolo";
 
 const gameParameters: GameParameters = {
     diagonalWin: true,
@@ -9,17 +11,23 @@ const gameParameters: GameParameters = {
     blackOutWin: true,
     linearWin: true,
     ballsPerLetter: 15,
-    boards: 100000,
-    gameName: 'BINGO',
+    boards: 10000,
+    gameName: 'BOGEY',
     pulls: 75,
     freeSpotEnabled: true
 }
 
 
-//let b = new Board(gameParameters.gameName, gameParameters.ballsPerLetter, gameParameters.freeSpotEnabled, 0);
-//
-//let win = WinChecker.linearWin(b);
-//console.log(win)
-let gc = new GameController(gameParameters);
-gc.start();
-gc.printStats();
+
+//let mc = new MultiplayerController(gameParameters);
+//console.log('Starting Game')
+//mc.start();
+//mc.printStats();
+
+let ms = new MultiSolo(gameParameters)
+ms.start()
+ms.printStats()
+
+
+
+

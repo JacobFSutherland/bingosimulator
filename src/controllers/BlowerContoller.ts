@@ -8,7 +8,7 @@ export class BlowerController{
         this.balls = []
         this.ballsPulled = []
         for(let i = 0; i < gp.gameName.length; i++){
-            for(let j = 1; j < gp.ballsPerLetter+1; j++){
+            for(let j = 1; j <= gp.ballsPerLetter; j++){
                 let b: Ball = new Ball(gp.gameName.split('')[i], j);
                 this.balls.push(b);
             }

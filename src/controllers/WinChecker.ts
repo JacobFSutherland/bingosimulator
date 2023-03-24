@@ -52,14 +52,14 @@ export class WinChecker{
 
 function firstDiagonal(b: Board): boolean{
     for(let i = 0; i < b.gameName.length; i++){
-        if(!b.state[b.gameName.split('')[i]][i].marked) return false;
+        if(b.state[b.gameName.split('')[i]][i].marked == false) return false;
     }
     return true;
 }
 function secondDiagonal(b: Board): boolean{
     let i = 0
     for(let j = b.gameName.length-1; j >= 0; j--){
-        if(!b.state[b.gameName.split('')[i++]][j].marked) return false;
+        if(b.state[b.gameName.split('')[i++]][j].marked == false) return false;
     }
     return true;
 }
